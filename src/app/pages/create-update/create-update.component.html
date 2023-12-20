@@ -1,0 +1,51 @@
+<h1 class="heading-7 pb-2">{{ title }}</h1>
+<form class="mt-4">
+  <div class="row">
+    <div class="col">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="inputName">
+        <label for="inputName">Nome Cliente:</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="inputCPF">
+        <label for="inputCPF">CPF:</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="inputBirthDate">
+        <label for="inputBirthDate">Data Nascimento:</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="inputMonthlyIncome">
+        <label for="inputMonthlyIncome">Renda Mensal:</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="inputEmail">
+        <label for="inputBirthDate">E-mail:</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="inputCreateDate">
+        <label for="inputCreateDate">Data Cadastro:</label>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+  <button class="btn btn-primary paragraph-4 me-md-2" type="button" (click)="return()">VOLTAR</button>
+  <button class="btn btn-primary paragraph-4" type="button" (click)="save()">SALVAR</button>
+</div>
+

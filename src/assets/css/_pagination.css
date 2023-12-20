@@ -1,0 +1,21 @@
+.page-link {
+  color: var(--neutral-white);
+  background-color:  var(--primary-dark);
+  border: 1px solid var(--primary-dark);
+
+  &:hover {
+    color: var(--neutral-white);
+    background-color:  var(--primary-ligth);
+    border: 1px solid var(--primary-ligth);
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.page-link.active, .active > .page-link {
+  color: var(--neutral-white);
+  border: 1px solid var(--primary-darkest);
+  background-color:  var(--primary-darkest);
+}

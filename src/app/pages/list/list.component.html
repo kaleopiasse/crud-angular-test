@@ -1,0 +1,27 @@
+<h1 class="heading-7 pb-2">CLIENTES</h1>
+
+<div class="d-flex align-items-center justify-content-between mt-4 pb-3">
+
+  <div class="form-floating d-flex">
+    <input type="text" class="form-control" id="inputName">
+    <span class="input-group-text" id="basic-search-name"><i class="bi bi-search"></i></span>
+    <label for="inputName">Nome Cliente:</label>
+  </div>
+  <div class="form-floating d-flex">
+    <input type="text" class="form-control" id="inputCPF">
+    <span class="input-group-text" id="basic-search-cpf"><i class="bi bi-search"></i></span>
+    <label for="inputCPF">CPF:</label>
+  </div>
+  <div class="form-floating d-flex">
+    <input type="text" class="form-control" id="inputBirthDate">
+    <span class="input-group-text" id="basic-search-birth-date"><i class="bi bi-search"></i></span>
+    <label for="inputBirthDate">Data Nascimento:</label>
+  </div>
+
+  <button type="button" class="btn btn-primary paragraph-4" (click)="addClient()">ADICIONAR CLIENTE</button>
+
+</div>
+
+<div class="mt-4">
+  <app-table></app-table>
+</div>
