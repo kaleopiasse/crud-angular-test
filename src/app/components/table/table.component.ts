@@ -1,29 +1,35 @@
 import { AsyncPipe, DecimalPipe } from '@angular/common';
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Country } from './country';
-import { CountryService } from './country.service';
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
 import { FormsModule } from '@angular/forms';
 import { NgbHighlight, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { ICLient } from '../../services/client';
+import { ClientService } from '../../services/client.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-table',
 	standalone: true,
 	imports: [DecimalPipe, FormsModule, AsyncPipe, NgbHighlight, NgbdSortableHeader, NgbPaginationModule],
 	templateUrl: './table.component.html',
-	providers: [CountryService, DecimalPipe],
+  providers: [ClientService]
 })
 export class TableComponent {
-	countries$: Observable<Country[]>;
+
+  @Input() data = new Observable<ICLient[]>
+	clients$: Observable<ICLient[]>;
 	total$: Observable<number>;
 
 	@ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
-	constructor(public service: CountryService) {
-		this.countries$ = service.countries$;
-		this.total$ = service.total$;
+	constructor(
+    public readonly clientService: ClientService,
+    private readonly router: Router
+  ) {
+		this.clients$ = clientService.clients$;
+		this.total$ = clientService.total$;
 	}
 
 	onSort({ column, direction }: SortEvent) {
@@ -34,7 +40,11 @@ export class TableComponent {
 			}
 		});
 
-		this.service.sortColumn = column;
-		this.service.sortDirection = direction;
+		this.clientService.sortColumn = column;
+		this.clientService.sortDirection = direction;
 	}
+
+  addClient() {
+    this.router.navigate(['create']);
+  }
 }

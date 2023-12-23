@@ -1,61 +1,58 @@
 <form>
-	<div class="mb-3 row">
-		<label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
-		<div class="col-xs-3 col-sm-auto">
-			<input
-				id="table-complete-search"
-				type="text"
-				class="form-control"
-				name="searchTerm"
-				[(ngModel)]="service.searchTerm"
-			/>
-		</div>
-		@if (service.loading$ | async) {
-			<span class="col col-form-label">Loading...</span>
-		}
-	</div>
+	<div class="d-flex align-items-center justify-content-between mt-4 pb-3">
+    <div class="form-floating d-flex">
+      <input type="text" class="form-control" id="inputName" name="searchTermName" [(ngModel)]="clientService.searchTermName">
+      <span class="input-group-text" id="basic-search-name"><i class="bi bi-search"></i></span>
+      <label for="inputName">Nome Cliente:</label>
+    </div>
+    <div class="form-floating d-flex">
+      <input type="text" class="form-control" id="inputCPF" name="searchTermCPF" [(ngModel)]="clientService.searchTermCPF">
+      <span class="input-group-text" id="basic-search-cpf"><i class="bi bi-search"></i></span>
+      <label for="inputCPF">CPF:</label>
+    </div>
+    <div class="form-floating d-flex">
+      <input type="text" class="form-control" id="inputBirthDate" name="searchTermBirthDate" [(ngModel)]="clientService.searchTermBirthDate">
+      <span class="input-group-text" id="basic-search-birth-date"><i class="bi bi-search"></i></span>
+      <label for="inputBirthDate">Data Nascimento:</label>
+    </div>
+    <button type="button" class="btn btn-primary paragraph-4" (click)="addClient()">ADICIONAR CLIENTE</button>
+  </div>
+	@if (clientService.loading$ | async) {
+		<span class="col col-form-label">Loading...</span>
+	}
 
-	<table class="table table-striped">
+	<table class="table table-striped mt-4">
 		<thead>
 			<tr>
-				<th scope="col">NOME</th>
-				<th scope="col" sortable="name" (sort)="onSort($event)">CPF</th>
-				<th scope="col" sortable="area" (sort)="onSort($event)">DATA CADASTRO</th>
-				<th scope="col" sortable="population" (sort)="onSort($event)">RENDA MENSAL</th>
+				<th scope="col" sortable="name" (sort)="onSort($event)">NOME</th>
+				<th scope="col" sortable="cpf" (sort)="onSort($event)">CPF</th>
+				<th scope="col" sortable="createdAt" (sort)="onSort($event)">DATA CADASTRO</th>
+				<th scope="col" sortable="salary" (sort)="onSort($event)">RENDA MENSAL</th>
 			</tr>
 		</thead>
 		<tbody>
-			@for (country of countries$ | async; track country.id) {
+			@for (item of clients$ | async; track item.id) {
 				<tr>
-					<td>{{ country.id }}</td>
-					<td>
-						<img
-							[src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
-							[alt]="'The flag of ' + country.name"
-							class="me-2"
-							style="width: 20px"
-						/>
-						<ngb-highlight [result]="country.name" [term]="service.searchTerm" />
-					</td>
-					<td><ngb-highlight [result]="country.area | number" [term]="service.searchTerm" /></td>
-					<td><ngb-highlight [result]="country.population | number" [term]="service.searchTerm" /></td>
+					<td>{{ item.name }}</td>
+					<td>{{ item.cpf}}</td>
+					<td>{{ item.createdAt }}</td>
+					<td>{{ item.salary }}</td>
 				</tr>
 			} @empty {
 				<tr>
-					<td colspan="4" style="text-align: center">No countries found</td>
+					<td colspan="4" style="text-align: center">No clients found</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 
 	<div class="d-flex justify-content-between p-2">
-		<ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+		<ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="clientService.page" [pageSize]="clientService.pageSize">
 		</ngb-pagination>
 
-		<select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
-			<option [ngValue]="2">2 ITENS POR PÁGINA</option>
-			<option [ngValue]="4">4 ITENS POR PÁGINA</option>
-			<option [ngValue]="6">6 ITENS POR PÁGINA</option>
+		<select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="clientService.pageSize">
+			<option [ngValue]="5">5 ITENS POR PÁGINA</option>
+			<option [ngValue]="10">10 ITENS POR PÁGINA</option>
 		</select>
 	</div>
 </form>
