@@ -2,19 +2,23 @@
 @import url('./assets/css/_button.css');
 @import url('./assets/css/_form.css');
 @import url('./assets/css/_font.css');
+@import url('./assets/css/_modal.css');
 @import url('./assets/css/_pagination.css');
 @import url('./assets/css/_table.css');
 
 :root {
+  --danger-medium: #e6173e;
   --ligth-white: #f5f5f5;
   --neutral-dark: #4f4f4f;
   --neutral-lightest: #ededed;
   --neutral-white: #fff;
+  --neutral-medium: #9e9e9e;
   --primary-darkest: #002C37;
   --primary-dark: #0A4A5B;
   --primary-medium: #00586f;
   --primary-ligth: #11728b;
   --secondary-darkest: #053542;
+  --secondary-medium: #73D852;
   --support-medium: #0EA0C0;
   --text-heading-color-1: #0B4051;
 }

@@ -1,94 +1,49 @@
 {
   "clients": [
     {
-      "id": 705,
+      "id": 1,
       "name": "Annecorinne Ashcroft",
       "email": "aashcroft0@wikimedia.org",
-      "cpf": "865.257.893-11",
-      "salary": "R$ 7.501,57",
-      "birthDate": "1998-06-05T03:30:17.415Z",
-      "createdAt": "2023-12-09T21:31:26.552Z"
+      "cpf": "86525789311",
+      "salary": 7501.57,
+      "birthDate": "581472000000",
+      "createdAt": "1703447793000"
     },
     {
-      "id": 829,
+      "id": 2,
       "name": "North Babbage",
       "email": "nbabbage1@liveinternet.ru",
-      "cpf": "203.828.049-53",
-      "salary": "R$ 2.147,32",
-      "birthDate": "2012-03-20T06:55:21.107Z",
-      "createdAt": "2023-12-14T15:24:52.539Z"
+      "cpf": "20382804953",
+      "salary": 2147.32,
+      "birthDate": "1269043200000",
+      "createdAt": "1703447793000"
     },
     {
-      "id": 759,
+      "id": 3,
       "name": "Gilly Record",
       "email": "grecord2@deviantart.com",
-      "cpf": "801.100.710-69",
-      "salary": "R$ 4.856,45",
-      "birthDate": "1982-12-03T02:20:06.734Z",
-      "createdAt": "2023-12-12T19:00:30.318Z"
+      "cpf": "80110071069",
+      "salary": 4856.45,
+      "birthDate": "407721600000",
+      "createdAt": "1703447793000"
     },
     {
-      "id": 837,
+      "id": 4,
       "name": "Bridgette Nulty",
       "email": "bnulty3@etsy.com",
-      "cpf": "781.617.854-90",
-      "salary": "R$ 6.235,30",
-      "birthDate": "1973-01-28T04:27:28.384Z",
-      "createdAt": "2023-12-03T09:29:41.179Z"
+      "cpf": "78161785490",
+      "salary": 6235.3,
+      "birthDate": "94694400000",
+      "createdAt": "1703447793000"
     },
     {
-      "id": 592,
+      "id": 5,
       "name": "Adan Pirrey",
       "email": "apirrey4@chronoengine.com",
-      "cpf": "252.581.153-48",
-      "salary": "R$ 9.718,25",
-      "birthDate": "2020-05-26T01:43:00.901Z",
-      "createdAt": "2023-12-02T10:02:43.990Z"
-    },
-    {
-      "id": 6908,
-      "name": "Nadiya McCorley",
-      "email": "nmccorley5@scientificamerican.com",
-      "cpf": "771.373.860-67",
-      "salary": "R$ 1.009,56",
-      "birthDate": "1970-12-09T01:54:57.036Z",
-      "createdAt": "2023-12-15T20:11:56.698Z"
-    },
-    {
-      "id": 910,
-      "name": "Amelie Robertsen",
-      "email": "arobertsen6@soundcloud.com",
-      "cpf": "185.303.268-90",
-      "salary": "R$ 2.913,94",
-      "birthDate": "1988-09-04T07:27:23.979Z",
-      "createdAt": "2023-12-20T22:22:30.462Z"
-    },
-    {
-      "id": 9266,
-      "name": "Jeanette Helstrom",
-      "email": "jhelstrom7@wix.com",
-      "cpf": "047.268.871-57",
-      "salary": "R$ 3.649,37",
-      "birthDate": "1973-03-15T19:54:25.295Z",
-      "createdAt": "2023-12-02T21:03:36.210Z"
-    },
-    {
-      "id": 6342,
-      "name": "Annissa Brisco",
-      "email": "abrisco8@un.org",
-      "cpf": "508.550.374-07",
-      "salary": "R$ 0.329,60",
-      "birthDate": "1969-07-02T07:54:18.363Z",
-      "createdAt": "2023-12-20T21:42:37.447Z"
-    },
-    {
-      "id": 8858,
-      "name": "Abby Mulloch",
-      "email": "amulloch9@un.org",
-      "cpf": "664.680.856-24",
-      "salary": "R$ 4.463,00",
-      "birthDate": "1980-12-24T02:30:49.208Z",
-      "createdAt": "2023-12-10T15:33:48.658Z"
+      "cpf": "25258115348",
+      "salary": 9718.25,
+      "birthDate": "665366400000",
+      "createdAt": "1703447793000"
     }
   ]
 }

@@ -1,13 +1,13 @@
 import { SortColumn, SortDirection } from "../components/table/sortable.directive";
 
 export interface ICLient {
-  id: number,
-  name: string,
-  email: string,
-  cpf: string,
-  salary: string,
-  birthDate: Date,
-  createdAt: Date
+  id?: number;
+  name: string;
+  email: string;
+  cpf: string;
+  salary: string;
+  birthDate: string;
+  createdAt: string;
 }
 
 export interface IState {

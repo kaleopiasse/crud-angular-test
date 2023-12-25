@@ -7,6 +7,8 @@ import { SortColumn, SortDirection } from '../components/table/sortable.directiv
 @Injectable()
 export class ClientService {
 
+  private _endpoint = 'http://localhost:3000/clients'
+
   private _state: IState = {
 		page: 1,
 		pageSize: 5,
@@ -45,6 +47,10 @@ export class ClientService {
 			});
 
 		this._search$.next();
+  }
+
+  saveClient(body: ICLient) {
+    return this.http.post(this._endpoint, body);
   }
 
   get clients$() {
@@ -101,7 +107,7 @@ export class ClientService {
 	}
 
   private _getUrl() {
-    let url: string = 'http://localhost:3000/clients';
+    let url: string = this._endpoint;
 
     url += `?_page=${this._state.page}&_limit=${this._state.pageSize}`
     if(this._state.sortDirection) url += `&_sort=${this._state.sortColumn}&_order=${this._state.sortDirection}`

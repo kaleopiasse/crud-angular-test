@@ -1,4 +1,4 @@
-import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { AsyncPipe, CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,13 +8,14 @@ import { NgbHighlight, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ICLient } from '../../services/client';
 import { ClientService } from '../../services/client.service';
 import { Router } from '@angular/router';
+import { NgxMaskPipe } from 'ngx-mask';
 
 @Component({
 	selector: 'app-table',
 	standalone: true,
-	imports: [DecimalPipe, FormsModule, AsyncPipe, NgbHighlight, NgbdSortableHeader, NgbPaginationModule],
+	imports: [CommonModule, DecimalPipe, FormsModule, AsyncPipe, NgbHighlight, NgbdSortableHeader, NgbPaginationModule, NgxMaskPipe],
 	templateUrl: './table.component.html',
-  providers: [ClientService]
+  providers: [ClientService, DatePipe]
 })
 export class TableComponent {
 

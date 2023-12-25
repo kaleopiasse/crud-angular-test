@@ -14,6 +14,12 @@
     color: var(--support-medium);
     font-size: 1.5rem;
   }
+
+  &.disabled{
+    label {
+      color: var(--neutral-medium) !important;
+    }
+  }
 }
 
 .form-control, .form-select {
@@ -28,6 +34,11 @@
 
   &:focus, &:focus-visible {
     border-color: var(--primary-medium) !important;
+    box-shadow: none;
+  }
+
+  &:read-only {
+    color: var(--neutral-medium);
     box-shadow: none;
   }
 }

@@ -34,9 +34,9 @@
 			@for (item of clients$ | async; track item.id) {
 				<tr>
 					<td>{{ item.name }}</td>
-					<td>{{ item.cpf}}</td>
-					<td>{{ item.createdAt }}</td>
-					<td>{{ item.salary }}</td>
+					<td>{{ item.cpf | mask: '000.000.000-00'}}</td>
+					<td>{{ item.createdAt | date: 'dd/MM/yyyy' }}</td>
+					<td>{{ item.salary | currency: 'BRL' }}</td>
 				</tr>
 			} @empty {
 				<tr>
