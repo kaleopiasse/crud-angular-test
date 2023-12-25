@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, debounceTime, delay, map, of, switchMap, tap } from 'rxjs';
 import { ICLient, IState } from './client';
 import { SortColumn, SortDirection } from '../components/table/sortable.directive';
+import { DateUtils } from '../utils/date.utils';
 
 @Injectable()
 export class ClientService {
@@ -125,7 +126,9 @@ export class ClientService {
     if(this._state.sortDirection) url += `&_sort=${this._state.sortColumn}&_order=${this._state.sortDirection}`
     if(this._state.searchTermName) url += `&name_like=${this._state.searchTermName}`
     if(this._state.searchTermCPF) url += `&cpf_like=${this._state.searchTermCPF}`
-    if(this._state.searchTermBirthDate) url += `&birthDate_like=${this._state.searchTermBirthDate}`
+
+    let dateTimestamp = Number(DateUtils.formateDateToTimeStamp(this._state.searchTermBirthDate))
+    if(!Number.isNaN(dateTimestamp)) url += `&birthDate_like=${dateTimestamp}`
 
     return url;
   }

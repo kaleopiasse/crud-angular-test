@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbHighlight, NgbPaginationModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, tap } from 'rxjs';
-import { NgxMaskPipe } from 'ngx-mask';
+import { NgxMaskPipe, NgxMaskDirective } from 'ngx-mask';
 
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
 import { ICLient } from '../../services/client';
@@ -13,7 +13,7 @@ import { ClientService } from '../../services/client.service';
 @Component({
 	selector: 'app-table',
 	standalone: true,
-	imports: [CommonModule, DecimalPipe, FormsModule, AsyncPipe, NgbHighlight, NgbdSortableHeader, NgbPaginationModule, NgxMaskPipe],
+	imports: [CommonModule, DecimalPipe, FormsModule, AsyncPipe, NgbHighlight, NgbdSortableHeader, NgbPaginationModule, NgxMaskPipe, NgxMaskDirective],
 	templateUrl: './table.component.html',
   styleUrl: './table.component.css',
   providers: [ClientService, DatePipe, NgbModal]

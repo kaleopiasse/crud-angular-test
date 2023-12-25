@@ -11,7 +11,7 @@
       <label for="inputCPF">CPF:</label>
     </div>
     <div class="form-floating d-flex">
-      <input type="text" class="form-control" id="inputBirthDate" name="searchTermBirthDate" [(ngModel)]="clientService.searchTermBirthDate">
+      <input type="text" class="form-control" id="inputBirthDate" name="searchTermBirthDate" [(ngModel)]="clientService.searchTermBirthDate" mask="d0/M0/0000" [dropSpecialCharacters]="false">
       <span class="input-group-text" id="basic-search-birth-date"><i class="bi bi-search"></i></span>
       <label for="inputBirthDate">Data Nascimento:</label>
     </div>
