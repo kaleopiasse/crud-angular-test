@@ -1,0 +1,11 @@
+.bi {
+  &.bi-exclamation-circle {
+    color: var(--danger-medium);
+  }
+  &.bi-check-circle {
+    color: var(--secondary-medium);
+  }
+}
+.modal-body .body-text.paragraph-4 {
+  color: var(--primary-medium);
+}

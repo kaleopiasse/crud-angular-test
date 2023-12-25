@@ -1,0 +1,48 @@
+.form-floating {
+  label {
+    color: var(--primary-medium) !important;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+  }
+
+  .input-group-text {
+    border: unset;
+    background-color: unset;
+    color: var(--support-medium);
+    font-size: 1.5rem;
+  }
+
+  &.disabled{
+    label {
+      color: var(--neutral-medium) !important;
+    }
+  }
+}
+
+.form-control, .form-select {
+  border: 1px solid var(--neutral-lightest);
+  color: var(--secondary-darkest);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  height: 3rem !important;
+  line-height: 150% !important;
+
+  &:focus, &:focus-visible {
+    border-color: var(--primary-medium) !important;
+    box-shadow: none;
+  }
+
+  &:read-only {
+    color: var(--neutral-medium);
+    box-shadow: none;
+  }
+}
+
+.form-control {
+  padding: 0.375rem 1rem;
+}
