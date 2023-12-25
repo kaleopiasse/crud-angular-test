@@ -1,17 +1,19 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { tap } from 'rxjs';
+import { EMPTY, catchError, tap } from 'rxjs';
+
 import { ClientService } from '../../services/client.service';
 import { ICLient } from '../../services/client';
+import { AgeValidator } from '../../validators/age.validator';
 import { CpfValidator } from '../../validators/cpf.validator';
-import { CommonModule } from '@angular/common';
 import { FullNameValidator } from '../../validators/fullName.validator';
 import { MsgsInputValidation } from '../../utils/string.utils';
 import { DateUtils } from '../../utils/date.utils';
-import { AgeValidator } from '../../validators/age.validator';
 
 @Component({
   selector: 'app-create-update',
@@ -33,6 +35,7 @@ export class CreateUpdateComponent implements OnInit {
     createdAt: new FormControl('', [Validators.required])
   })
 
+  @ViewChild('modalCreateUpdate') modalContent!: NgbModalRef;
   modal = { modalIcon: '', modalMsg: ''}
   errorMsgs: Record<string, string> = MsgsInputValidation
 
@@ -54,34 +57,17 @@ export class CreateUpdateComponent implements OnInit {
     ).subscribe()
 
     if(this.id) {
-      this.getClient(this.id);
+      this._getClient(this.id);
     } else {
       this.form.controls.createdAt.setValue(this.ngxMaskPipe.transform(new Date(this.today).toLocaleDateString(), 'd0/M0/0000'))
       this.form.controls.createdAt.disabled;
     }
-
   }
 
-  getClient(id: number) {
-    this.clientService.getClient(id).pipe(
-      tap(res => {
-        this.form.setValue(
-          {
-            name: res.name,
-            cpf: res.cpf,
-            birthDate: this.ngxMaskPipe.transform(new Date(Number(res.birthDate)).toLocaleDateString(), 'd0/M0/0000'),
-            salary: res.salary,
-            email: res.email,
-            createdAt: this.ngxMaskPipe.transform(new Date(Number(res.createdAt)).toLocaleDateString(), 'd0/M0/0000'),
-          })
-      })
-    ).subscribe();
-  }
-
-  save(content: TemplateRef<any>) {
+  createBodyClient() {
     if(this.form.invalid) {
       this._formMsgsValidation();
-      this.modalService.open(content, { centered: true });
+      this.modalService.open(this.modalContent, { centered: true });
       return;
     }
 
@@ -97,23 +83,9 @@ export class CreateUpdateComponent implements OnInit {
     }
 
     if(!this.id) {
-      this.clientService.saveClient(body).pipe(
-        tap(() =>{
-          this.modal.modalIcon = 'bi-check-circle';
-          this.modal.modalMsg = 'Cliente adicionado com sucesso'
-
-          this.modalService.open(content, { centered: true })
-        })
-      ).subscribe()
+      this._saveClient(body);
     } else {
-      this.clientService.editClient(this.id,body).pipe(
-        tap(() =>{
-          this.modal.modalIcon = 'bi-check-circle';
-          this.modal.modalMsg = 'Cliente editado com sucesso'
-
-          this.modalService.open(content, { centered: true })
-        })
-      ).subscribe()
+      this._editClient(body);
     }
   }
 
@@ -124,6 +96,48 @@ export class CreateUpdateComponent implements OnInit {
   closeModal() {
     if (this.modal.modalIcon == 'bi-check-circle') this.returnPageList();
     this.modalService.dismissAll();
+  }
+
+  private _getClient(id: number) {
+    this.clientService.getClient(id).pipe(
+      tap(res => {
+        this.form.setValue(
+          {
+            name: res.name,
+            cpf: res.cpf,
+            birthDate: this.ngxMaskPipe.transform(new Date(Number(res.birthDate)).toLocaleDateString(), 'd0/M0/0000'),
+            salary: res.salary,
+            email: res.email,
+            createdAt: this.ngxMaskPipe.transform(new Date(Number(res.createdAt)).toLocaleDateString(), 'd0/M0/0000'),
+          })
+      }),
+      catchError(() => {
+        this.router.navigate(['']);
+        return EMPTY;
+      })
+    ).subscribe();
+  }
+
+  private _editClient(body: ICLient) {
+    this.clientService.editClient(this.id,body).pipe(
+      tap(() =>{
+        this.modal.modalIcon = 'bi-check-circle';
+        this.modal.modalMsg = 'Cliente editado com sucesso'
+
+        this.modalService.open(this.modalContent, { centered: true })
+      })
+    ).subscribe()
+  }
+
+  private _saveClient(body: ICLient) {
+    this.clientService.saveClient(body).pipe(
+      tap(() =>{
+        this.modal.modalIcon = 'bi-check-circle';
+        this.modal.modalMsg = 'Cliente adicionado com sucesso'
+
+        this.modalService.open(this.modalContent, { centered: true })
+      })
+    ).subscribe()
   }
 
   private _formMsgsValidation() {

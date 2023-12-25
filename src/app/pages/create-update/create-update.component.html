@@ -46,10 +46,10 @@
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
   <button class="btn btn-primary paragraph-4 me-md-2" type="button" (click)="returnPageList()">VOLTAR</button>
-  <button class="btn btn-primary paragraph-4" type="button" (click)="save(content)">SALVAR</button>
+  <button class="btn btn-primary paragraph-4" type="button" (click)="createBodyClient()">SALVAR</button>
 </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #modalCreateUpdate let-c="close" let-d="dismiss">
 	<div class="modal-body d-flex flex-column align-items-center justify-content-center">
     <div class="mb-1">
       <i class="display-3 bi" [ngClass]="modal.modalIcon"></i>

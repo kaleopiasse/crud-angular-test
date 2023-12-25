@@ -15,7 +15,9 @@
       <span class="input-group-text" id="basic-search-birth-date"><i class="bi bi-search"></i></span>
       <label for="inputBirthDate">Data Nascimento:</label>
     </div>
-    <button type="button" class="btn btn-primary paragraph-4" (click)="addClient()">ADICIONAR CLIENTE</button>
+    <div>
+      <button type="button" class="btn btn-primary paragraph-4" (click)="addClient()">ADICIONAR CLIENTE</button>
+    </div>
   </div>
 	@if (clientService.loading$ | async) {
 		<span class="col col-form-label">Loading...</span>

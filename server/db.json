@@ -1,3 +1,67 @@
 {
-  "clients": []
+  "clients": [
+    {
+      "name": "Naruto Uzumaki",
+      "cpf": "19075420005",
+      "birthDate": "605588400000",
+      "salary": 15000,
+      "email": "naruto@email.com",
+      "createdAt": "1703473200000",
+      "id": 1
+    },
+    {
+      "name": "Sasuke Uchiha",
+      "cpf": "98144716078",
+      "birthDate": "616474800000",
+      "salary": 18000,
+      "email": "sasuke@email.com",
+      "createdAt": "1699671600000",
+      "id": 2
+    },
+    {
+      "name": "Sakura Haruno",
+      "cpf": "24882934078",
+      "birthDate": "629604000000",
+      "salary": 17000,
+      "email": "sakura@email.com",
+      "createdAt": "1672542000000",
+      "id": 3
+    },
+    {
+      "name": "Kakashi Hatake",
+      "cpf": "24882934078",
+      "birthDate": "298090800000",
+      "salary": 23000,
+      "email": "kakashi@email.com",
+      "createdAt": "1577847600000",
+      "id": 4
+    },
+    {
+      "name": "Rock Lee",
+      "cpf": "51795411074",
+      "birthDate": "636174000000",
+      "salary": 15000,
+      "email": "rocklee@email.com",
+      "createdAt": "1703473200000",
+      "id": 5
+    },
+    {
+      "name": "Minato Namikaze",
+      "cpf": "34749968005",
+      "birthDate": "31546800000",
+      "salary": 25000,
+      "email": "minato@email.com",
+      "createdAt": "1514772000000",
+      "id": 6
+    },
+    {
+      "name": "Shikamaru Nara",
+      "cpf": "35628499072",
+      "birthDate": "662695200000",
+      "salary": 15000,
+      "email": "shikamaru@email.com",
+      "createdAt": "1703473200000",
+      "id": 7
+    }
+  ]
 }
