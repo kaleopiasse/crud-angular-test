@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { tap } from 'rxjs';
 import { ClientService } from '../../services/client.service';
@@ -10,6 +10,8 @@ import { CpfValidator } from '../../validators/cpf.validator';
 import { CommonModule } from '@angular/common';
 import { FullNameValidator } from '../../validators/fullName.validator';
 import { MsgsInputValidation } from '../../utils/string.utils';
+import { DateUtils } from '../../utils/date.utils';
+import { AgeValidator } from '../../validators/age.validator';
 
 @Component({
   selector: 'app-create-update',
@@ -17,7 +19,7 @@ import { MsgsInputValidation } from '../../utils/string.utils';
   imports: [CommonModule, NgxMaskDirective, NgxMaskPipe, ReactiveFormsModule],
   templateUrl: './create-update.component.html',
   styleUrl: './create-update.component.css',
-  providers: [ClientService, NgbModalConfig, NgbModal, NgxMaskPipe]
+  providers: [ClientService, NgbModal, NgxMaskPipe]
 })
 export class CreateUpdateComponent implements OnInit {
   title: String = ''
@@ -25,7 +27,7 @@ export class CreateUpdateComponent implements OnInit {
   form = this.formBuilder.group({
     name: new FormControl('',[Validators.required, FullNameValidator.validator]),
     cpf: new FormControl('', [Validators.required, CpfValidator.validator]),
-    birthDate: new FormControl('', [Validators.required]),
+    birthDate: new FormControl('', [Validators.required, AgeValidator.validator]),
     salary: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     createdAt: new FormControl('', [Validators.required])
@@ -34,6 +36,7 @@ export class CreateUpdateComponent implements OnInit {
   modal = { modalIcon: '', modalMsg: ''}
   errorMsgs: Record<string, string> = MsgsInputValidation
 
+  id = this.activatedRoute.snapshot.params['id'];
   private today = new Date().getTime();
 
   constructor(
@@ -50,8 +53,29 @@ export class CreateUpdateComponent implements OnInit {
       tap((res) => this.title = res['title'])
     ).subscribe()
 
-    this.form.controls.createdAt.setValue(this.ngxMaskPipe.transform(new Date(this.today).toLocaleDateString(), 'd0/M0/0000'))
-    this.form.controls.createdAt.disabled;
+    if(this.id) {
+      this.getClient(this.id);
+    } else {
+      this.form.controls.createdAt.setValue(this.ngxMaskPipe.transform(new Date(this.today).toLocaleDateString(), 'd0/M0/0000'))
+      this.form.controls.createdAt.disabled;
+    }
+
+  }
+
+  getClient(id: number) {
+    this.clientService.getClient(id).pipe(
+      tap(res => {
+        this.form.setValue(
+          {
+            name: res.name,
+            cpf: res.cpf,
+            birthDate: this.ngxMaskPipe.transform(new Date(Number(res.birthDate)).toLocaleDateString(), 'd0/M0/0000'),
+            salary: res.salary,
+            email: res.email,
+            createdAt: this.ngxMaskPipe.transform(new Date(Number(res.createdAt)).toLocaleDateString(), 'd0/M0/0000'),
+          })
+      })
+    ).subscribe();
   }
 
   save(content: TemplateRef<any>) {
@@ -66,20 +90,31 @@ export class CreateUpdateComponent implements OnInit {
     const body: ICLient = {
       name: name || '',
       cpf: cpf || '',
-      birthDate: birthDate ? this._formateDateToTimeStamp(birthDate) : '',
+      birthDate: birthDate ? DateUtils.formateDateToTimeStamp(birthDate) : '',
       salary: salary || '',
       email: email || '',
-      createdAt: createdAt ? new Date(this.today).getTime().toString() : ''
+      createdAt: createdAt ? DateUtils.formateDateToTimeStamp(createdAt) : ''
     }
 
-    this.clientService.saveClient(body).pipe(
-      tap(() =>{
-        this.modal.modalIcon = 'bi-check-circle';
-        this.modal.modalMsg = 'Cliente adicionado com sucesso'
+    if(!this.id) {
+      this.clientService.saveClient(body).pipe(
+        tap(() =>{
+          this.modal.modalIcon = 'bi-check-circle';
+          this.modal.modalMsg = 'Cliente adicionado com sucesso'
 
-        this.modalService.open(content, { centered: true })
-      })
-    ).subscribe()
+          this.modalService.open(content, { centered: true })
+        })
+      ).subscribe()
+    } else {
+      this.clientService.editClient(this.id,body).pipe(
+        tap(() =>{
+          this.modal.modalIcon = 'bi-check-circle';
+          this.modal.modalMsg = 'Cliente editado com sucesso'
+
+          this.modalService.open(content, { centered: true })
+        })
+      ).subscribe()
+    }
   }
 
   returnPageList() {
@@ -89,11 +124,6 @@ export class CreateUpdateComponent implements OnInit {
   closeModal() {
     if (this.modal.modalIcon == 'bi-check-circle') this.returnPageList();
     this.modalService.dismissAll();
-  }
-
-  private _formateDateToTimeStamp(datePtBr: string) {
-    let datePtBrArray = datePtBr.split('/');
-    return new Date(`${datePtBrArray[2]}-${datePtBrArray[1]}-${datePtBrArray[0]}`).getTime().toString();
   }
 
   private _formMsgsValidation() {

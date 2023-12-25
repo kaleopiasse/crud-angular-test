@@ -19,7 +19,7 @@ export class ClientService {
 		sortDirection: '',
 	};
 
-  private _search$ = new Subject<void>();
+  public _search$ = new Subject<void>();
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _total$ = new BehaviorSubject<number>(0);
   private _clients$ = new BehaviorSubject<ICLient[]>([]);
@@ -49,8 +49,20 @@ export class ClientService {
 		this._search$.next();
   }
 
+  getClient(id: number): Observable<ICLient> {
+    return this.http.get(this._endpoint + '/' + id) as Observable<ICLient>;
+  }
+
   saveClient(body: ICLient) {
     return this.http.post(this._endpoint, body);
+  }
+
+  editClient(id: number, body: ICLient) {
+    return this.http.put(this._endpoint + '/' + id, body);
+  }
+
+  deleteClient(id: number) {
+    return this.http.delete(this._endpoint + '/' + id);
   }
 
   get clients$() {

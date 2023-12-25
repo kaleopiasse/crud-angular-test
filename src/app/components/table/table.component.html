@@ -28,6 +28,7 @@
 				<th scope="col" sortable="cpf" (sort)="onSort($event)">CPF</th>
 				<th scope="col" sortable="createdAt" (sort)="onSort($event)">DATA CADASTRO</th>
 				<th scope="col" sortable="salary" (sort)="onSort($event)">RENDA MENSAL</th>
+        <th scope="col">AÇÔES</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,10 +38,14 @@
 					<td>{{ item.cpf | mask: '000.000.000-00'}}</td>
 					<td>{{ item.createdAt | date: 'dd/MM/yyyy' }}</td>
 					<td>{{ item.salary | currency: 'BRL' }}</td>
+          <td>
+            <a class="me-3" alt="VISUALIZAR" (click)="viewDetails(item.id)"><i class="heading-7 bi-eye"></i></a>
+            <a alt="EXCLUIR" (click)="verifyDelete(item.id || 0)"><i class="heading-7 bi-trash3"></i></a>
+          </td>
 				</tr>
 			} @empty {
 				<tr>
-					<td colspan="4" style="text-align: center">No clients found</td>
+					<td colspan="4" style="text-align: center">NÂO FORAM ENCONTRADOS CLIENTES PARA EXIBIR</td>
 				</tr>
 			}
 		</tbody>
@@ -56,3 +61,18 @@
 		</select>
 	</div>
 </form>
+
+<ng-template #modalDelete let-c="close" let-d="dismiss">
+	<div class="modal-body d-flex flex-column align-items-center justify-content-center">
+    <div class="mb-1">
+      <i class="display-3 bi" [ngClass]="modal.modalIcon"></i>
+    </div>
+    <div class="body-text paragraph-4 mt-2">
+      <p [innerHTML]="modal.modalMsg"></p>
+    </div>
+    <div>
+      <button *ngIf="modal.step == 1" type="button" class="btn btn-primary paragraph-4 me-3" (click)="d()">VOLTAR</button>
+      <button type="button" class="btn btn-primary paragraph-4" (click)="confirmBtnModal()">{{ modal.step == 1 ? 'SIM' : 'OK' }}</button>
+    </div>
+	</div>
+</ng-template>

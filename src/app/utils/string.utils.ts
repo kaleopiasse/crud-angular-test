@@ -5,8 +5,9 @@ export class StringUtils {
 }
 
 export const MsgsInputValidation = {
-  required: 'A campos obrigatórios que precisam ser preenchidos',
   cpf: 'Insira um CPF válido',
+  email: 'Insira um email válido',
+  invalidDateBirth: 'Cliente deve possuir idade entre 18 e 60 anos',
   invalidName: 'Insira um nome e sobrenome válidos',
-  email: 'Insira um email válido'
+  required: 'A campos obrigatórios que precisam ser preenchidos',
 }

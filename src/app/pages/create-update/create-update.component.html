@@ -8,8 +8,8 @@
       </div>
     </div>
     <div class="col">
-      <div class="form-floating">
-        <input type="text" class="form-control" id="inputCPF" [formControl]="form.controls.cpf" mask="000.000.000-00">
+      <div class="form-floating" [ngClass]="id ? 'disabled' : ''">
+        <input type="text" class="form-control" id="inputCPF" [formControl]="form.controls.cpf" mask="000.000.000-00" [readOnly]="id ? true: false">
         <label for="inputCPF">CPF:</label>
       </div>
     </div>
@@ -36,8 +36,8 @@
       </div>
     </div>
     <div class="col">
-      <div class="form-floating disabled">
-        <input type="text" class="form-control" id="inputCreatedAt" [formControl]="form.controls.createdAt" mask="d0/M0/0000" readonly>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="inputCreatedAt" [formControl]="form.controls.createdAt" mask="d0/M0/0000" [dropSpecialCharacters]="false">
         <label for="inputCreatedAt">Data Cadastro:</label>
       </div>
     </div>
